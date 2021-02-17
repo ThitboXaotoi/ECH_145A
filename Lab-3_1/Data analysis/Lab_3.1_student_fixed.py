@@ -1,14 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Oct 30 16:10:50 2020
-
-@author: tfinney
-"""
-
 import scipy.interpolate
 import numpy
 import pandas
+
+"""
+Copy Pasta from this part
+"""
 
 user_sg = 0.851145 #specific gravity
 temp_F = 87.8 #degF
@@ -47,16 +43,28 @@ proof_idx = numpy.where(ttb1_ys == proof_rd)[0][0] #same for proof
 
 f = ttb1[proof_idx,temp_idx] #get this value  from ttb1
 
+
+
 temp_plus_1 = T_rd + 1 # following along with that pdf 
 proof_plus_1 = proof_rd + 1
 
 f_proof_plus_1 = ttb1[proof_idx + 1, temp_idx] 
 f_temp_plus_1 = ttb1[proof_idx,temp_idx + 1]
 
-df_dC = (f_proof_plus_1 - f) / (proof_plus_1 - proof_rd) 
-df_dT = (f_temp_plus_1 - f) / (temp_plus_1 - T_rd)
+"""
+End Here
+"""
 
-the_true_proof = f + (calculated_proof - proof_rd) * df_dC + (temp_F - T_rd) * df_dT
+alpha = 15E-6
+
+# df_dC = (f_proof_plus_1 - f) / (proof_plus_1 - proof_rd) 
+
+dAP_dTP = (proof_plus_1 - proof_rd) / (f_proof_plus_1 - f)
+dTP_dT = (f_temp_plus_1 - f) / (temp_plus_1 - T_rd)
+
+# the_true_proof = f + (calculated_proof - proof_rd) * df_dC + (temp_F - T_rd) * df_dT
+
+# drho_dAP = 0.99904 * ()
 
 print(calculated_proof)
 print(the_true_proof)
